@@ -5,15 +5,15 @@
 // - Pushbutton on A1
 // - Pushbutton on A2
 // - Pushbutton on A3
-// - Led on 13
-// Many, many thanks to Adafruit industries where I blantly lifted this code
+// - LED on 13
+// Many, many thanks to Adafruit industries where I blatantly lifted this code
 // http://www.adafruit.com/blog/2009/10/20/example-code-for-multi-button-checker-with-debouncing/
 // Buy something from there please
 
 //Globals variables
-//  Hashmarked lines are not comments in the Adruino IDE as is common
+//  Hash marked lines are not comments in the Arduino IDE as is common
 //  with other languages, more details: http://arduino.cc/en/Reference/Define
-//
+
 #define DEBOUNCE 10
 byte buttons[] = {14, 15,16, 17}; // the analog 0-5 pins are also known as 14-19
 #define NUMBUTTONS sizeof(buttons)

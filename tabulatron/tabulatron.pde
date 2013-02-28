@@ -20,7 +20,7 @@ String revformkey = "0AicMfKa7wo4FdHdaS1NkdEtHY2Y5YkNjaDVfNGFpSkE"; //the privat
 String btn0 = "Reference"; // the text of the first option in the dropdown box
 String btn1 = "Technical"; // the text of the second option in the dropdown box
 String btn2 = "Directional"; // the text of the third option in the dropdown box
-String btn3 = "Referral"; // the text of the forth option in the dropdown box
+String btn3 = "Referral"; // the text of the fourth option in the dropdown box
 char bsig;
 
 //Clicking on the 'View Form' button will open up the 'edit' mode in a browser
@@ -45,7 +45,7 @@ void viewform(){
 }
 
 //Draw the 4 boxes and labels them according to the form values outlined above
-//Once a button is pressed it wil be drawn in green, as a form of feedback
+//Once a button is pressed it will be drawn in green, as a form of feedback
 void boxmaker(int c, int pos){
   
  //1 draws a green box, everything else is white
@@ -125,7 +125,7 @@ void setup() {
   boxmaker(0,2);
   boxmaker(0,3);
   viewform();
-  //At first run you'll have to figure our what COMM port the Arduino is on
+  //At first run you'll have to figure out what COMM port the Arduino is on
   //change the array index to corresponding value 
   println(Serial.list());
   port = new Serial(this,Serial.list()[2],9600);
