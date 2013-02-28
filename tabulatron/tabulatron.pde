@@ -9,10 +9,11 @@
 import processing.serial.*;
 Serial port;
 PFont f;
+String buttonsig;
 
 // A Google Doc Form is required.
 // It should only have 1 question on it
-// That one quesition should be a dropdown box with only 4 values on it
+// That one question should be a dropdown box with only 4 values on it
 // Example: https://docs.google.com/spreadsheet/viewform?formkey=dHdaS1NkdEtHY2Y5YkNjaDVfNGFpSkE6MQ#gid=0
 String formkey = "dHdaS1NkdEtHY2Y5YkNjaDVfNGFpSkE6MQ"; //the public 'key' for the Google document form (found in url of view mode)
 String revformkey = "0AicMfKa7wo4FdHdaS1NkdEtHY2Y5YkNjaDVfNGFpSkE"; //the private key for the Google document form (found in the url of edit mode)
@@ -20,6 +21,7 @@ String btn0 = "Reference"; // the text of the first option in the dropdown box
 String btn1 = "Technical"; // the text of the second option in the dropdown box
 String btn2 = "Directional"; // the text of the third option in the dropdown box
 String btn3 = "Referral"; // the text of the forth option in the dropdown box
+char bsig;
 
 //Clicking on the 'View Form' button will open up the 'edit' mode in a browser
 //A login to Google Doc will be needed unless set to public
@@ -134,8 +136,16 @@ void setup() {
 //Works fairly well
 void draw() {
   while (port.available() > 0){
-    String buttonsig = port.readStringUntil(char(10));
-      char bsig = buttonsig.charAt(0);
+    buttonsig = port.readStringUntil(char(10));
+    try{
+      bsig = buttonsig.charAt(0);
+    }
+    catch (Exception e){
+       //Sometimes reading from serial will produce a null value
+       //break out and try again
+       break;
+    } 
+      
       switch(bsig){
         case '0':
           clearboxes();

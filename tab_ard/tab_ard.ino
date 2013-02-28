@@ -8,9 +8,12 @@
 // - Led on 13
 // Many, many thanks to Adafruit industries where I blantly lifted this code
 // http://www.adafruit.com/blog/2009/10/20/example-code-for-multi-button-checker-with-debouncing/
-// Buys something from there please
+// Buy something from there please
 
-//Globals
+//Globals variables
+//  Hashmarked lines are not comments in the Adruino IDE as is common
+//  with other languages, more details: http://arduino.cc/en/Reference/Define
+//
 #define DEBOUNCE 10
 byte buttons[] = {14, 15,16, 17}; // the analog 0-5 pins are also known as 14-19
 #define NUMBUTTONS sizeof(buttons)
@@ -59,8 +62,9 @@ void flick_led()
   delay(250);
 }
 
-//Once again, big thanks to: http://www.adafruit.com/blog/2009/10/20/example-code-for-multi-button-checker-with-debouncing/
-//for this function
+//This function does the heavy lifting of checking for button presses
+//and changing the values of the byte array to reflect button
+//states
 void check_switches()
 {
   static byte previousstate[NUMBUTTONS];
@@ -107,6 +111,7 @@ void loop() {
     if (justpressed[i]) {
       Serial.print(i, DEC); //Print the button number to the serial port so that the processing app can listen for it.
       Serial.println();
+      Serial.flush();  //Always flush when you're done.
       flick_led(); //An immediate couple of blinks of the LED makes the user feel like it has done something
     }
 
