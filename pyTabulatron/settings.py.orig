@@ -1,0 +1,10 @@
+
+
+# Fill in values are rename to settings.py
+#
+#
+
+
+#How often to check for serial communication
+pollInterval = 1500
+

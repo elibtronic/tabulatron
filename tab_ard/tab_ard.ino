@@ -15,7 +15,7 @@
 //  with other languages, more details: http://arduino.cc/en/Reference/Define
 
 #define DEBOUNCE 10
-byte buttons[] = {14, 15,16, 17}; // the analog 0-5 pins are also known as 14-19
+byte buttons[] = {14, 15,16, 17}; // the analog 0-4 pins are also known as 14-17
 #define NUMBUTTONS sizeof(buttons)
 byte pressed[NUMBUTTONS], justpressed[NUMBUTTONS], justreleased[NUMBUTTONS];
 int led = 13;
@@ -110,10 +110,11 @@ void loop() {
   for (byte i = 0; i < NUMBUTTONS; i++) {
     if (justpressed[i]) {
       Serial.print(i, DEC); //Print the button number to the serial port so that the processing app can listen for it.
-      Serial.println();
+      //Serial.println();
       Serial.flush();  //Always flush when you're done.
       flick_led(); //An immediate couple of blinks of the LED makes the user feel like it has done something
     }
+    Serial.print(NUMBUTTONS + 1,DEC); //Keep Alive signal will be int 5?  Why? my buttons are already going 0 - 4
 
   }
 }
