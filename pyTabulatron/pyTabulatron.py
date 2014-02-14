@@ -8,51 +8,94 @@
 #
 from settings import *
 from Tkinter import *
-import serial,time
+import serial,time,datetime,os,urllib2,sys
 
-# on linux probably something like serial.Serial("ttyACM0")
-# on windows some thing like serial.Serial("COM5",9600,timeout=1)
-ser = serial.Serial("COM5",9600,timeout=1)
+uname = ""
+#Set to current user
+try:
+        uname = os.environ["USERNAME"]
+except:
+        uname = "USERNAME"
+
+#Get COM port from config file
+try:
+        cPort = open("COM.txt",'r')
+        portString = cPort.readline()
+        ser = serial.Serial(portString,9600,timeout=0)
+except:
+        print "Could not open port!"
+        sys.exit()
 
 def checkForSignal():
-        while 1:
-                line = ser.read()
-                ser.flush()
-                if str(line) == "0":
-                        sig_0()
-                elif str(line) == "1":
-                        sig_1()
-                elif str(line) == "2":
-                        sig_2()
-                elif str(line) == "3":
-                        sig_3()
-                time.sleep(1)
-                        
-def sig_0():
-        b1.config(text="red")
-        print "0"
+        global isChecking
+        line = ser.read()
+        if str(line) == "0":
+                sig0()
+        elif str(line) == "1":
+                sig1()
+        elif str(line) == "2":
+                sig2()
+        elif str(line) == "3":
+                sig3()
+        root.after(pollInterval,checkForSignal)
 
-def sig_1():
-        print "1"
+def sig0():
+        b1.config(bg="green")
+        b2.config(bg="grey")
+        b3.config(bg="grey")
+        b4.config(bg="grey")
+        lastTab.config(text="Last: " + datetime.datetime.now().strftime('%H:%M:%S'))
+        req = urllib2.Request(b1URL+uname)
+        res = urllib2.urlopen(req)
 
-def sig_2():
-        print "2"
+def sig1():
+        b1.config(bg="grey")
+        b2.config(bg="green")
+        b3.config(bg="grey")
+        b4.config(bg="grey")
+        lastTab.config(text="Last: " + datetime.datetime.now().strftime('%H:%M:%S'))
+        req = urllib2.Request(b2URL+uname)
+        res = urllib2.urlopen(req)
 
-def sig_3():
-        print "3"
+def sig2():
+        b1.config(bg="grey")
+        b2.config(bg="grey")
+        b3.config(bg="green")
+        b4.config(bg="grey")
+        lastTab.config(text="Last: " + datetime.datetime.now().strftime('%H:%M:%S'))
+        req = urllib2.Request(b3URL+uname)
+        res = urllib2.urlopen(req)
+        
+def sig3():
+        b1.config(bg="grey")
+        b2.config(bg="grey")
+        b3.config(bg="grey")
+        b4.config(bg="green")
+        lastTab.config(text="Last: " + datetime.datetime.now().strftime('%H:%M:%S'))
+        req = urllib2.Request(b4URL+uname)
+        res = urllib2.urlopen(req)
 
+#Juicy bits
 root = Tk()
-root.title("Tabulatron")
-root.geometry("500x500")
+root.title(tabTitle)
+root.resizable(width=FALSE,height=FALSE)
+root.geometry("500x225")
+b0 = Label(root, width=40)
+b1 = Label(root, text=b1Text,bg="grey",font=("Arial",16),width=40,pady=5)
+b2 = Label(root, text=b2Text,bg="grey",font=("Arial",16),width=40,pady=5)
+b3 = Label(root, text=b3Text,bg="grey",font=("Arial",16),width=40,pady=5)
+b4 = Label(root, text=b4Text,bg="grey",font=("Arial",16),width=40,pady=5)
 
-b1 = Label(root, text=b1Text)
-b2 = Label(root, text=b2Text)
-b3 = Label(root, text=b3Text)
-b4 = Label(root, text=b4Text)
+userLabel = Label(root,text=uname,font=("Arial",8),width=90,anchor="e")
+lastTab = Label(root,text="Last:",font=("Arial",8),width=90,anchor="e")
+
+b0.pack()
 b1.pack()
 b2.pack()
 b3.pack()
 b4.pack()
+userLabel.pack()
+lastTab.pack()
 
 root.after(pollInterval,checkForSignal)
 root.mainloop()
