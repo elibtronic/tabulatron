@@ -14,7 +14,7 @@
 //  Hash marked lines are not comments in the Arduino IDE as is common
 //  with other languages, more details: http://arduino.cc/en/Reference/Define
 
-#define DEBOUNCE 10
+#define DEBOUNCE 50
 byte buttons[] = {14, 15,16, 17}; // the analog 0-4 pins are also known as 14-17
 #define NUMBUTTONS sizeof(buttons)
 byte pressed[NUMBUTTONS], justpressed[NUMBUTTONS], justreleased[NUMBUTTONS];
@@ -114,7 +114,7 @@ void loop() {
       Serial.flush();  //Always flush when you're done.
       flick_led(); //An immediate couple of blinks of the LED makes the user feel like it has done something
     }
-    Serial.print(NUMBUTTONS + 1,DEC); //Keep Alive signal will be int 5?  Why? my buttons are already going 0 - 4
+    //Serial.print(NUMBUTTONS + 1,DEC); //Keep Alive signal will be int 5?  Why? my buttons are already going 0 - 4
 
   }
 }
