@@ -24,12 +24,11 @@ try:
         for p in serial.tools.list_ports.comports():
                 if re.search('Arduino Uno',str(p[1])):
                         portString = str(p[0])
-                
+        #print portString       
         ser = serial.Serial(portString,9600,timeout=0)
 except:
-        #print "Could not open port!"
+        print "Could not open port!"
         sys.exit()
-
 
 
 def checkForSignal():
@@ -51,6 +50,7 @@ def sig0():
         b3.config(bg="grey")
         b4.config(bg="grey")
         lastTab.config(text="Last: " + datetime.datetime.now().strftime('%H:%M:%S'))
+        #print b1URL+uname
         req = urllib2.Request(b1URL+uname)
         res = urllib2.urlopen(req)
 
@@ -60,6 +60,7 @@ def sig1():
         b3.config(bg="grey")
         b4.config(bg="grey")
         lastTab.config(text="Last: " + datetime.datetime.now().strftime('%H:%M:%S'))
+        #print b2URL+uname
         req = urllib2.Request(b2URL+uname)
         res = urllib2.urlopen(req)
 
@@ -69,6 +70,7 @@ def sig2():
         b3.config(bg="green")
         b4.config(bg="grey")
         lastTab.config(text="Last: " + datetime.datetime.now().strftime('%H:%M:%S'))
+        #print b3URL+uname
         req = urllib2.Request(b3URL+uname)
         res = urllib2.urlopen(req)
         
@@ -78,6 +80,7 @@ def sig3():
         b3.config(bg="grey")
         b4.config(bg="green")
         lastTab.config(text="Last: " + datetime.datetime.now().strftime('%H:%M:%S'))
+        #print b4URL+uname
         req = urllib2.Request(b4URL+uname)
         res = urllib2.urlopen(req)
 
@@ -86,6 +89,7 @@ root = Tk()
 root.title(tabTitle)
 root.resizable(width=FALSE,height=FALSE)
 root.geometry("500x225")
+root.iconbitmap("pencil.ico")
 b0 = Label(root, width=40)
 b1 = Label(root, text=b1Text,bg="grey",font=("Arial",16),width=40,pady=5)
 b2 = Label(root, text=b2Text,bg="grey",font=("Arial",16),width=40,pady=5)
