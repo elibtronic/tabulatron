@@ -9,6 +9,8 @@
 from settings import *
 from Tkinter import *
 import serial,time,datetime,os,urllib2,sys
+import serial.tools.list_ports
+import re
 
 uname = ""
 #Set to current user
@@ -17,14 +19,18 @@ try:
 except:
         uname = "USERNAME"
 
-#Get COM port from config file
+#Try to find Arduino automatically
 try:
-        cPort = open("COM.txt",'r')
-        portString = cPort.readline()
+        for p in serial.tools.list_ports.comports():
+                if re.search('Arduino Uno',str(p[1])):
+                        portString = str(p[0])
+                
         ser = serial.Serial(portString,9600,timeout=0)
 except:
-        print "Could not open port!"
+        #print "Could not open port!"
         sys.exit()
+
+
 
 def checkForSignal():
         global isChecking
