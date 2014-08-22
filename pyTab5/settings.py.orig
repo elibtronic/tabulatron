@@ -1,0 +1,23 @@
+
+
+# Fill in values are rename to settings.py
+#
+#
+
+
+#How often to check for serial communication
+pollInterval = 1500
+
+tabTitle = "Tabulatron"
+
+formkey = "dHdaS1NkdEtHY2Y5YkNjaDVfNGFpSkE6MQ"
+
+b1Text = "Reference"
+b2Text = "Technical"
+b3Text = "Directional"
+b4Text = "Referral"
+
+b1URL = "https://docs.google.com/spreadsheet/formResponse?formkey="+formkey+"&amp;ifq&entry.1.single="+b1Text
+b2URL = "https://docs.google.com/spreadsheet/formResponse?formkey="+formkey+"&amp;ifq&entry.1.single="+b2Text
+b3URL = "https://docs.google.com/spreadsheet/formResponse?formkey="+formkey+"&amp;ifq&entry.1.single="+b3Text
+b4URL = "https://docs.google.com/spreadsheet/formResponse?formkey="+formkey+"&amp;ifq&entry.1.single="+b4Text
