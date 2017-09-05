@@ -7,7 +7,7 @@
 #
 #
 from settings import *
-from Tkinter import *
+from tkinter import *
 import serial,time,datetime,os,urllib2,sys
 import serial.tools.list_ports
 import re
@@ -36,7 +36,7 @@ try:
         #print portString       
         ser = serial.Serial(portString,9600,timeout=0)
 except:
-        print "Could not open port!"
+        print("Could not open port!")
         sys.exit()
 
 
