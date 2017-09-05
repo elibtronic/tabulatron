@@ -2,6 +2,8 @@
 
 
 ![](tab_vb.PNG) 
+
+
 Tabulatron client in vb and in action!
 
 ## Basics
@@ -12,7 +14,9 @@ Takes an Arduino with 4 push buttons on it and posts the button presses to a Goo
 [Beyond Open Source Software: Solving Common Library Problems Using the Open Source Hardware Arduino Platform](https://journal.lib.uoguelph.ca/index.php/perj/article/view/2497/) 
 
 
-Descriptions of each folder
+Links above should give you the basics on what it does and the construction of the arduino device. 
+
+*Descriptions of each top level folder*
 
 ### vb_version
 This is a newly designed Visual Basic Implementation of the client software.
